@@ -1,0 +1,42 @@
+
+   <odoo>
+    <record id="view_daily_sales_report_wizard" model="ir.ui.view">
+        <field name="name">daily.sales.report.wizard.form</field>
+        <field name="model">daily.sales.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Daily Sales Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="salesperson_id"/>
+                            <field name="include_paid_orders"/>
+                            <field name="include_delivery_status"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Export to Excel" type="object" name="action_generate_report" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_daily_sales_report" model="ir.actions.act_window">
+        <field name="name">Daily Sales Report</field>
+        <field name="res_model">daily.sales.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_daily_sales_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_reporting_daily_sales"
+              name="Daily Sales Report"
+              parent="sale.menu_sale_report"
+              action="action_daily_sales_report"
+              sequence="40"/>
+</odoo>
